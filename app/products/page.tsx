@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import Header from '@/components/Header'
@@ -9,7 +9,7 @@ import WhatsAppFloat from '@/components/WhatsAppFloat'
 import Image from 'next/image'
 import { Filter, Grid, List, Star, Search, ShoppingBag, Package, TrendingUp } from 'lucide-react'
 
-export default function ProductsPage() {
+function ProductsContent() {
   const searchParams = useSearchParams()
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || 'all')
   const [sortBy, setSortBy] = useState('name')
@@ -625,5 +625,20 @@ export default function ProductsPage() {
         }
       `}</style>
     </div>
+  )
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-amber-50 to-orange-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-500 mx-auto mb-4"></div>
+          <p className="text-gray-600 font-medium">Loading products...</p>
+        </div>
+      </div>
+    }>
+      <ProductsContent />
+    </Suspense>
   )
 }
