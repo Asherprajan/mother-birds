@@ -31,8 +31,7 @@ export default function AboutPage() {
     hidden: { opacity: 0, y: 60 },
     visible: { 
       opacity: 1, 
-      y: 0,
-      transition: { duration: 0.8, ease: "easeOut" }
+      y: 0
     }
   }
 
@@ -49,8 +48,7 @@ export default function AboutPage() {
     hidden: { scale: 0.8, opacity: 0 },
     visible: { 
       scale: 1, 
-      opacity: 1,
-      transition: { duration: 0.6, ease: "easeOut" }
+      opacity: 1
     }
   }
 
@@ -58,8 +56,7 @@ export default function AboutPage() {
     hidden: { x: -100, opacity: 0 },
     visible: { 
       x: 0, 
-      opacity: 1,
-      transition: { duration: 0.8, ease: "easeOut" }
+      opacity: 1
     }
   }
 
@@ -67,8 +64,7 @@ export default function AboutPage() {
     hidden: { x: 100, opacity: 0 },
     visible: { 
       x: 0, 
-      opacity: 1,
-      transition: { duration: 0.8, ease: "easeOut" }
+      opacity: 1
     }
   }
 
@@ -96,7 +92,7 @@ export default function AboutPage() {
               transition={{ 
                 duration: 3,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: [0.42, 0, 0.58, 1]
               }}
             >
               <Sparkles className="text-yellow-300" size={24} />
@@ -115,7 +111,7 @@ export default function AboutPage() {
               transition={{ 
                 duration: 2,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: [0.42, 0, 0.58, 1]
               }}
             >
               <Star className="text-yellow-300" size={20} />
@@ -315,7 +311,7 @@ export default function AboutPage() {
                   transition={{ 
                     duration: 6,
                     repeat: Infinity,
-                    ease: "easeInOut"
+                    ease: [0.42, 0, 0.58, 1]
                   }}
                   className="absolute -inset-4 bg-gradient-to-r from-[#DA1414]/20 to-[#228B22]/20 rounded-2xl blur-lg"
                 />
@@ -513,7 +509,7 @@ export default function AboutPage() {
                       transition={{ 
                         duration: 2,
                         repeat: Infinity,
-                        ease: "easeInOut"
+                        ease: [0.42, 0, 0.58, 1]
                       }}
                       className={`absolute -top-2 -right-2 w-8 h-8 ${value.badgeColor} rounded-full flex items-center justify-center`}
                     >
@@ -561,7 +557,7 @@ export default function AboutPage() {
                   transition={{ 
                     duration: 8,
                     repeat: Infinity,
-                    ease: "easeInOut"
+                    ease: [0.42, 0, 0.58, 1]
                   }}
                   className="absolute -inset-6 bg-gradient-to-r from-[#DA1414]/20 to-[#228B22]/20 rounded-3xl blur-2xl"
                 />
@@ -768,7 +764,7 @@ export default function AboutPage() {
                       transition={{ 
                         duration: 4,
                         repeat: Infinity,
-                        ease: "easeInOut",
+                        ease: [0.42, 0, 0.58, 1],
                         delay: index * 0.5
                       }}
                       className={`absolute inset-0 bg-gradient-to-r ${member.iconColor} rounded-full blur-lg opacity-20`}
@@ -919,7 +915,7 @@ export default function AboutPage() {
                       transition={{ 
                         duration: 3,
                         repeat: Infinity,
-                        ease: "easeInOut",
+                        ease: [0.42, 0, 0.58, 1],
                         delay: index * 0.2
                       }}
                       className={`absolute inset-0 bg-gradient-to-r ${cert.color} rounded-2xl blur-lg`}
