@@ -1,35 +1,30 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { HeroHeading, Tagline, BodyText } from '@/components/ui/typography'
+import { getCategories } from '@/lib/api'
+import type { Category } from '@/lib/types'
 
 export default function Categories() {
-  const categories = [
-    {
-      name: 'Pickles & Chutney',
-      image: '/placeholder.svg?height=200&width=200&text=Pickles',
-      description: 'Traditional pickles and chutneys made with authentic recipes'
-    },
-    {
-      name: 'Sauces & Ketchup',
-      image: '/placeholder.svg?height=200&width=200&text=Sauces',
-      description: 'Rich and flavorful sauces for every meal'
-    },
-    {
-      name: 'Jams',
-      image: '/placeholder.svg?height=200&width=200&text=Jams',
-      description: 'Sweet and delicious jams made from fresh fruits'
-    },
-    {
-      name: 'Fruit Syrups & Mixes',
-      image: '/placeholder.svg?height=200&width=200&text=Syrups',
-      description: 'Refreshing fruit syrups and drink mixes'
-    },
-    {
-      name: 'Other Repacked Products',
-      image: '/placeholder.svg?height=200&width=200&text=Products',
-      description: 'Quality food products carefully selected and repacked'
+  const [categories, setCategories] = useState<Category[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function loadCategories() {
+      try {
+        const data = await getCategories()
+        setCategories(data)
+      } catch (error) {
+        console.error('Error loading categories:', error)
+      } finally {
+        setLoading(false)
+      }
     }
-  ]
+
+    loadCategories()
+  }, [])
 
   return (
     <section className="py-20 bg-gradient-to-br from-[#FFF8E1] via-[#FFFBEA] to-[#FFD700]/10 font-sans border-b border-[#FFD700]/30">
@@ -45,39 +40,60 @@ export default function Categories() {
             Discover authentic Indian flavors in every category.
           </BodyText>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-8">
-          {categories.map((category, index) => (
-            <Link
-              key={index}
-              href={`/products?category=${encodeURIComponent(category.name)}`}
-              className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-[#FFD700]/30 hover:border-[#DA1414] relative animate-fade-in-up"
-              style={{ fontFamily: 'var(--font-poppins), var(--font-sans), sans-serif' }}
-            >
-              <div className="aspect-square overflow-hidden bg-[#FFF8E1] flex items-center justify-center relative">
-                <Image
-                  src={category.image || "/placeholder.svg"}
-                  alt={category.name}
-                  width={200}
-                  height={200}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  draggable={false}
-                />
-                {/* Decorative sparkle */}
-                <span className="absolute top-3 right-3 text-[#FFD700] text-xl opacity-80 group-hover:animate-sparkle pointer-events-none select-none">✨</span>
+        
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-8">
+            {[...Array(5)].map((_, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-[#FFD700]/30 animate-pulse"
+              >
+                <div className="aspect-square bg-gray-200" />
+                <div className="p-5 space-y-3">
+                  <div className="h-6 bg-gray-200 rounded w-3/4 mx-auto" />
+                  <div className="h-4 bg-gray-200 rounded w-full" />
+                  <div className="h-4 bg-gray-200 rounded w-2/3 mx-auto" />
+                </div>
               </div>
-              <div className="p-5 flex flex-col items-center text-center">
-                <h3 className="font-extrabold text-lg sm:text-xl text-[#B91C1C] mb-2 group-hover:text-[#DA1414] transition-colors font-serif" style={{ fontFamily: 'var(--font-playfair-display), serif' }}>
-                  {category.name}
-                </h3>
-                <p className="text-sm sm:text-base text-[#444] opacity-80 font-sans">
-                  {category.description}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : categories.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-gray-500 text-lg">No categories available at the moment.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-8">
+            {categories.map((category, index) => (
+              <Link
+                key={index}
+                href={`/products?category=${encodeURIComponent(category.name)}`}
+                className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-[#FFD700]/30 hover:border-[#DA1414] relative animate-fade-in-up"
+                style={{ fontFamily: 'var(--font-poppins), var(--font-sans), sans-serif' }}
+              >
+                <div className="aspect-square overflow-hidden bg-[#FFF8E1] flex items-center justify-center relative">
+                  <Image
+                    src={category.image_url || "/placeholder.svg"}
+                    alt={category.name}
+                    width={200}
+                    height={200}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    draggable={false}
+                  />
+                  <span className="absolute top-3 right-3 text-[#FFD700] text-xl opacity-80 group-hover:animate-sparkle pointer-events-none select-none">✨</span>
+                </div>
+                <div className="p-5 flex flex-col items-center text-center">
+                  <h3 className="font-extrabold text-lg sm:text-xl text-[#B91C1C] mb-2 group-hover:text-[#DA1414] transition-colors font-serif" style={{ fontFamily: 'var(--font-playfair-display), serif' }}>
+                    {category.name}
+                  </h3>
+                  <p className="text-sm sm:text-base text-[#444] opacity-80 font-sans">
+                    {category.description}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
-      {/* Custom Animations for sparkle */}
       <style jsx>{`
         @keyframes sparkle {
           0%, 100% { opacity: 0.7; transform: scale(1);}

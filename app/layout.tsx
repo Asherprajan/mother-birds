@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Playfair_Display, Poppins } from 'next/font/google'
 import './globals.css'
 import Background from '@/components/Background'
+import { Toaster } from 'sonner'
 
 const playfairDisplay = Playfair_Display({ 
   subsets: ['latin'],
@@ -34,6 +35,7 @@ export default function RootLayout({
         <Background>
           {children}
         </Background>
+        <Toaster position="top-right" richColors />
       </body>
     </html>
   )

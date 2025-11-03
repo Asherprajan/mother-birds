@@ -41,22 +41,11 @@ export default function Home() {
       >
         <Partners/>
       </motion.div>
-      <motion.div
-        variants={sectionVariants as any  }
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-      >
+
         <Categories/>
-      </motion.div>
-      <motion.div
-        variants={sectionVariants as any}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-      >
+
+     
         <FeaturedProducts/>
-      </motion.div>
       <motion.div
         variants={sectionVariants as any}
         initial="hidden"
