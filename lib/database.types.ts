@@ -47,15 +47,10 @@ export interface Database {
           weight_volume: string | null
           image_url: string
           pack_size: string | null
-          mrp: number | null
-          wholesale_price: number | null
-          tax_info: string | null
-          wholesale_box: string | null
           stock_status: string | null
           tags: string[] | null
           is_featured: boolean | null
           is_popular: boolean | null
-          discount: number | null
           created_at: string
           updated_at: string
         }
@@ -70,15 +65,10 @@ export interface Database {
           weight_volume?: string | null
           image_url: string
           pack_size?: string | null
-          mrp?: number | null
-          wholesale_price?: number | null
-          tax_info?: string | null
-          wholesale_box?: string | null
           stock_status?: string | null
           tags?: string[] | null
           is_featured?: boolean | null
           is_popular?: boolean | null
-          discount?: number | null
           created_at?: string
           updated_at?: string
         }
@@ -93,15 +83,10 @@ export interface Database {
           weight_volume?: string | null
           image_url?: string
           pack_size?: string | null
-          mrp?: number | null
-          wholesale_price?: number | null
-          tax_info?: string | null
-          wholesale_box?: string | null
           stock_status?: string | null
           tags?: string[] | null
           is_featured?: boolean | null
           is_popular?: boolean | null
-          discount?: number | null
           created_at?: string
           updated_at?: string
         }

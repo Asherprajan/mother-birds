@@ -22,8 +22,6 @@ export default function AddProductPage() {
     packaging_type: '',
     weight_volume: '',
     image_url: '',
-    pack_size: '',
-    rating: '0',
     stock_status: 'In Stock',
     tags: '',
     is_featured: false,
@@ -59,8 +57,6 @@ export default function AddProductPage() {
       packaging_type: formData.packaging_type || undefined,
       weight_volume: formData.weight_volume || undefined,
       image_url: formData.image_url,
-      pack_size: formData.pack_size || undefined,
-      rating: parseFloat(formData.rating) || undefined,
       stock_status: formData.stock_status,
       tags: formData.tags ? formData.tags.split(',').map(t => t.trim()).filter(Boolean) : undefined,
       is_featured: formData.is_featured,
@@ -145,18 +141,7 @@ export default function AddProductPage() {
                 </select>
               </div>
 
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Pack Size
-                </label>
-                <input
-                  type="text"
-                  value={formData.pack_size}
-                  onChange={(e) => setFormData({ ...formData, pack_size: e.target.value })}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-red-100 focus:border-red-500 transition-all outline-none text-base"
-                  placeholder="e.g., 500g, 1kg"
-                />
-              </div>
+              
             </div>
           </div>
 
@@ -220,21 +205,6 @@ export default function AddProductPage() {
                   onChange={(e) => setFormData({ ...formData, weight_volume: e.target.value })}
                   className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-red-100 focus:border-red-500 transition-all outline-none text-base"
                   placeholder="e.g., 500g, 1L"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Rating (0-5)
-                </label>
-                <input
-                  type="number"
-                  min="0"
-                  max="5"
-                  step="0.1"
-                  value={formData.rating}
-                  onChange={(e) => setFormData({ ...formData, rating: e.target.value })}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-red-100 focus:border-red-500 transition-all outline-none text-base"
                 />
               </div>
 

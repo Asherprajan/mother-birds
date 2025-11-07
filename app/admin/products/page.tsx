@@ -132,7 +132,6 @@ export default function ProductsPage() {
                         </div>
                         <div>
                           <p className="font-bold text-gray-900 text-base">{product.product_name}</p>
-                          <p className="text-sm text-gray-600 font-medium">{product.pack_size}</p>
                         </div>
                       </div>
                     </td>
